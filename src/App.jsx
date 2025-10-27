@@ -1,35 +1,125 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import SearchForm from './components/SearchForm';
+import ResultsTable from './components/ResultsTable';
+import BookDetail from './components/BookDetail';
+import ReadingList from './components/ReadingList';
+import useLocalStorage from './hooks/useLocalStorage';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+/**
+ * Main App Component - LibraRead
+ */
+export default function App() {
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [selectedBook, setSelectedBook] = useState(null);
+  const [readingList, setReadingList] = useLocalStorage('libraread:readingList', []);
+
+  /**
+   * Fetch books dari Open Library API
+   * @param {Object} formData - Form search data
+   */
+  const searchBooks = async (formData) => {
+    setLoading(true);
+    setError(null);
+    setSearchResults([]);
+
+    try {
+      // Build query string
+      const queryParts = [];
+      
+      if (formData.query) queryParts.push(`title=${encodeURIComponent(formData.query)}`);
+      if (formData.author) queryParts.push(`author=${encodeURIComponent(formData.author)}`);
+      if (formData.subject) queryParts.push(`subject=${encodeURIComponent(formData.subject)}`);
+      
+      const queryString = queryParts.join('&');
+      const url = `https://openlibrary.org/search.json?${queryString}&limit=${formData.limit}`;
+
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch books');
+      }
+
+      const data = await response.json();
+      
+      // Filter by year if specified
+      let results = data.docs || [];
+      if (formData.year) {
+        results = results.filter(book => 
+          book.first_publish_year === parseInt(formData.year)
+        );
+      }
+
+      setSearchResults(results);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /**
+   * Tambah buku ke reading list
+   * @param {Object} book - Book object
+   */
+  const addToReadingList = (book) => {
+    const exists = readingList.some(item => item.key === book.key);
+    
+    if (exists) {
+      alert('This book is already in your reading list!');
+      return;
+    }
+
+    setReadingList(prev => [...prev, book]);
+    alert(`"${book.title}" added to your reading list!`);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app">
+      <header className="site-header">
+        <div>
+          <h1>♎ LibraRead</h1>
+          <p className="tagline">Discover Your Next Great Read</p>
+        </div>
+      </header>
 
-export default App
+      <main className="main-grid">
+        <div className="main-content">
+          <SearchForm onSearch={searchBooks} loading={loading} />
+
+          {error && (
+            <div className="error-message" role="alert">
+              <strong>Error:</strong> {error}
+            </div>
+          )}
+
+          {loading && (
+            <div className="loading-message">
+              <div className="spinner"></div>
+              <p>Searching books...</p>
+            </div>
+          )}
+
+          {!loading && searchResults.length > 0 && (
+            <div className="results-section">
+              <h2>Search Results ({searchResults.length})</h2>
+              <ResultsTable 
+                data={searchResults} 
+                onSelect={setSelectedBook}
+                onAddToList={addToReadingList}
+              />
+            </div>
+          )}
+        </div>
+
+        <ReadingList onOpenDetail={setSelectedBook} />
+      </main>
+
+      {selectedBook && (
+        <BookDetail book={selectedBook} onClose={() => setSelectedBook(null)} />
+      )}
+    </div>
+  );
+}
