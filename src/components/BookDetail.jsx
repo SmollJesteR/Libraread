@@ -55,49 +55,61 @@ export default function BookDetail({ book, onClose }) {
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose} aria-label="Close">×</button>
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 animate-fadeIn" onClick={onClose}>
+      <div className="bg-white p-8 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto relative shadow-2xl animate-slideUp" 
+        onClick={(e) => e.stopPropagation()}>
+        <button 
+          className="absolute right-4 top-4 w-10 h-10 bg-green-light text-green-dark text-2xl rounded-full flex items-center justify-center hover:bg-green hover:text-white transform hover:rotate-90 transition-all"
+          onClick={onClose} 
+          aria-label="Close"
+        >
+          ×
+        </button>
         
-        <div className="modal-header">
+        <div className="flex flex-col md:flex-row gap-6 pb-6 mb-6 border-b-2 border-green-light">
           {book.cover_i && (
             <img
               src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
               alt={`Cover of ${book.title}`}
-              className="modal-cover"
+              className="w-32 h-auto rounded-lg shadow-md"
             />
           )}
           <div>
-            <h2>{book.title}</h2>
-            <p className="modal-author">by {book.author_name?.[0] || 'Unknown'}</p>
-            <p className="modal-year">First Published: {book.first_publish_year || '—'}</p>
+            <h2 className="text-2xl text-green font-semibold mb-2">{book.title}</h2>
+            <p className="text-gray-600 text-lg mb-1">by {book.author_name?.[0] || 'Unknown'}</p>
+            <p className="text-gray-500 text-sm">First Published: {book.first_publish_year || '—'}</p>
           </div>
         </div>
 
-        {loading && <p className="loading">Loading details...</p>}
+        {loading && <p className="text-center text-gray-600 p-4">Loading details...</p>}
         
-        {error && <p className="error">Error: {error}</p>}
+        {error && <p className="text-red-600 p-4">Error: {error}</p>}
         
         {!loading && detail && (
           <>
-            <section className="modal-section">
-              <h3>Description</h3>
-              <p>{getDescription()}</p>
+            <section className="mb-6">
+              <h3 className="text-xl text-green font-semibold mb-3">Description</h3>
+              <p className="text-gray-700 leading-relaxed">{getDescription()}</p>
             </section>
 
-            <section className="modal-section">
-              <h3>Subjects</h3>
-              <div className="subjects-grid">
+            <section className="mb-6">
+              <h3 className="text-xl text-green font-semibold mb-3">Subjects</h3>
+              <div className="flex flex-wrap gap-2">
                 {detail.subjects?.slice(0, 15).map((subject, idx) => (
-                  <span key={idx} className="subject-tag">{subject}</span>
-                )) || <p>No subjects available</p>}
+                  <span 
+                    key={idx} 
+                    className="bg-green-light text-green-dark px-3 py-1.5 rounded-full text-sm font-medium"
+                  >
+                    {subject}
+                  </span>
+                )) || <p className="text-gray-500">No subjects available</p>}
               </div>
             </section>
 
             {detail.publishers && (
-              <section className="modal-section">
-                <h3>Publishers</h3>
-                <p>{detail.publishers.join(', ')}</p>
+              <section className="mb-6">
+                <h3 className="text-xl text-green font-semibold mb-3">Publishers</h3>
+                <p className="text-gray-700">{detail.publishers.join(', ')}</p>
               </section>
             )}
           </>

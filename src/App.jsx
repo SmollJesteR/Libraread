@@ -3,9 +3,10 @@ import SearchForm from './components/SearchForm';
 import ResultsTable from './components/ResultsTable';
 import BookDetail from './components/BookDetail';
 import ReadingList from './components/ReadingList';
+import Navbar from './components/Navbar';
+import HeroSection from './components/HeroSection';
+import TestimonialsSection from './components/TestimonialsSection';
 import useLocalStorage from './hooks/useLocalStorage';
-import './App.css';
-
 /**
  * Main App Component - LibraRead
  */
@@ -77,16 +78,11 @@ export default function App() {
   };
 
   return (
-    <div className="app">
-      <header className="site-header">
-        <div>
-          <h1>♎ LibraRead</h1>
-          <p className="tagline">Discover Your Next Great Read</p>
-        </div>
-      </header>
-
-      <main className="main-grid">
-        <div className="main-content">
+    <div className="min-h-screen bg-gradient-to-br from-green-light to-white">
+      <Navbar />
+      <HeroSection />
+      <main className="grid grid-cols-1 lg:grid-cols-[1fr,350px] gap-6 p-8 max-w-[1600px] mx-auto">
+        <div className="space-y-6">
           <SearchForm onSearch={searchBooks} loading={loading} />
 
           {error && (
@@ -120,6 +116,7 @@ export default function App() {
       {selectedBook && (
         <BookDetail book={selectedBook} onClose={() => setSelectedBook(null)} />
       )}
+      <TestimonialsSection />
     </div>
   );
 }

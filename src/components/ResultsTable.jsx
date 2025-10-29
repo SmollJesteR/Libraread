@@ -6,52 +6,54 @@
  */
 export default function ResultsTable({ data = [], onSelect, onAddToList }) {
   return (
-    <div className="table-container">
-      <table className="results-table" role="table">
+    <div className="overflow-x-auto">
+      <table className="w-full border-collapse bg-white" role="table">
         <thead>
           <tr>
-            <th>Cover</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Year</th>
-            <th>Actions</th>
+            <th className="bg-green-light text-green-dark p-4 text-left font-semibold border-b-2 border-green">Cover</th>
+            <th className="bg-green-light text-green-dark p-4 text-left font-semibold border-b-2 border-green">Title</th>
+            <th className="bg-green-light text-green-dark p-4 text-left font-semibold border-b-2 border-green">Author</th>
+            <th className="bg-green-light text-green-dark p-4 text-left font-semibold border-b-2 border-green">Year</th>
+            <th className="bg-green-light text-green-dark p-4 text-left font-semibold border-b-2 border-green">Actions</th>
           </tr>
         </thead>
         <tbody>
           {data.length === 0 ? (
             <tr>
-              <td colSpan="5" className="no-data">No results found</td>
+              <td colSpan="5" className="text-center p-8 text-gray-500 italic">No results found</td>
             </tr>
           ) : (
             data.map((item) => (
-              <tr key={item.key}>
-                <td>
+              <tr key={item.key} className="hover:bg-green-light transition-colors">
+                <td className="p-4 border-b border-gray-200">
                   {item.cover_i ? (
                     <img
                       src={`https://covers.openlibrary.org/b/id/${item.cover_i}-S.jpg`}
                       alt={`Cover of ${item.title}`}
-                      className="cover-thumb"
+                      className="w-12 h-auto rounded shadow-sm"
                       loading="lazy"
                     />
                   ) : (
-                    <div className="cover-placeholder" aria-hidden="true">📚</div>
+                    <div className="w-12 h-16 bg-green-light flex items-center justify-center rounded text-2xl" aria-hidden="true">
+                      📚
+                    </div>
                   )}
                 </td>
-                <td><strong>{item.title}</strong></td>
-                <td>{item.author_name?.[0] || '—'}</td>
-                <td>{item.first_publish_year || '—'}</td>
-                <td>
-                  <div className="action-buttons">
+                <td className="p-4 border-b border-gray-200 font-semibold">{item.title}</td>
+                <td className="p-4 border-b border-gray-200">{item.author_name?.[0] || '—'}</td>
+                <td className="p-4 border-b border-gray-200">{item.first_publish_year || '—'}</td>
+                <td className="p-4 border-b border-gray-200">
+                  <div className="flex gap-2">
                     <button 
                       onClick={() => onSelect(item)}
-                      className="btn-detail"
+                      className="px-4 py-2 bg-green text-white font-semibold rounded hover:bg-green-dark transition-colors"
                       title="View details"
                     >
                       Detail
                     </button>
                     <button 
                       onClick={() => onAddToList(item)}
-                      className="btn-add"
+                      className="px-4 py-2 bg-green-light text-green-dark font-semibold rounded border-2 border-green hover:bg-green hover:text-white transition-colors"
                       title="Add to reading list"
                     >
                       + List
