@@ -1,12 +1,23 @@
 import { useState } from 'react';
 
 export default function Navbar() {
-  const [activeItem, setActiveItem] = useState('catalogue');
+  const [activeItem, setActiveItem] = useState('home');
   const [open, setOpen] = useState(false);
 
   const handleSelect = (id) => {
     setActiveItem(id);
     setOpen(false); // close mobile menu after selection
+    
+    // Handle scroll to sections
+    if (id === 'home') {
+      document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+    } else if (id === 'discover') {
+      document.getElementById('search').scrollIntoView({ behavior: 'smooth' });
+    } else if (id === 'testimonial') {
+      document.getElementById('testimonial').scrollIntoView({ behavior: 'smooth' });
+    } else if (id === 'about') {
+      window.open('https://smolljesterarchieve.vercel.app/', '_blank');
+    }
   };
 
   return (
@@ -25,18 +36,18 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-6">
           <button
             className={`px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:text-green
-              ${activeItem === 'catalogue' ? 'bg-green text-white' : 'text-green-dark'}`}
-            onClick={() => handleSelect('catalogue')}
+              ${activeItem === 'home' ? 'bg-green text-white' : 'text-green-dark'}`}
+            onClick={() => handleSelect('home')}
           >
-            Catalogue
+            Home
           </button>
 
           <button
             className={`px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:text-green
-              ${activeItem === 'about' ? 'bg-green text-white' : 'text-green-dark'}`}
-            onClick={() => handleSelect('about')}
+              ${activeItem === 'discover' ? 'bg-green text-white' : 'text-green-dark'}`}
+            onClick={() => handleSelect('discover')}
           >
-            About
+            Discover
           </button>
 
           <button
@@ -45,6 +56,14 @@ export default function Navbar() {
             onClick={() => handleSelect('testimonial')}
           >
             Testimonial
+          </button>
+
+          <button
+            className={`px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:text-green
+              ${activeItem === 'about' ? 'bg-green text-white' : 'text-green-dark'}`}
+            onClick={() => handleSelect('about')}
+          >
+            About
           </button>
         </div>
 
@@ -75,10 +94,26 @@ export default function Navbar() {
           <ul className="flex flex-col gap-3">
             <li>
               <button
-                className={`w-full text-left px-3 py-2 rounded-md font-semibold ${activeItem === 'catalogue' ? 'bg-green text-white' : 'text-green-dark hover:text-green'}`}
-                onClick={() => handleSelect('catalogue')}
+                className={`w-full text-left px-3 py-2 rounded-md font-semibold ${activeItem === 'home' ? 'bg-green text-white' : 'text-green-dark hover:text-green'}`}
+                onClick={() => handleSelect('home')}
               >
-                Catalogue
+                Home
+              </button>
+            </li>
+            <li>
+              <button
+                className={`w-full text-left px-3 py-2 rounded-md font-semibold ${activeItem === 'discover' ? 'bg-green text-white' : 'text-green-dark hover:text-green'}`}
+                onClick={() => handleSelect('discover')}
+              >
+                Discover
+              </button>
+            </li>
+            <li>
+              <button
+                className={`w-full text-left px-3 py-2 rounded-md font-semibold ${activeItem === 'testimonial' ? 'bg-green text-white' : 'text-green-dark hover:text-green'}`}
+                onClick={() => handleSelect('testimonial')}
+              >
+                Testimonial
               </button>
             </li>
             <li>
@@ -90,12 +125,6 @@ export default function Navbar() {
               </button>
             </li>
             <li>
-              <button
-                className={`w-full text-left px-3 py-2 rounded-md font-semibold ${activeItem === 'testimonial' ? 'bg-green text-white' : 'text-green-dark hover:text-green'}`}
-                onClick={() => handleSelect('testimonial')}
-              >
-                Testimonial
-              </button>
             </li>
           </ul>
         </div>

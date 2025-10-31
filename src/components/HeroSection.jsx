@@ -2,7 +2,7 @@ import heroImage from "../assets/hero_img.svg";
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden py-16 px-6">
+    <section id="hero" className="relative overflow-hidden py-16 px-6">
       {/* Background image + gradient overlay (Tailwind utilities) */}
       <div className="absolute inset-0 -z-10">
         <img

@@ -90,7 +90,9 @@ export default function App() {
       <HeroSection />
       <main className="grid grid-cols-1 lg:grid-cols-[1fr,350px] gap-6 p-8 max-w-[1600px] mx-auto">
         <div className="space-y-6">
-          <SearchForm onSearch={searchBooks} loading={loading} />
+          <div id="search">
+            <SearchForm onSearch={searchBooks} loading={loading} />
+          </div>
 
           {error && (
             <div className="error-message" role="alert">
