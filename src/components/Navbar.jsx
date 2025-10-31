@@ -23,12 +23,7 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-gradient-to-r from-green-light to-white border-b-3 border-green shadow-md px-4 md:px-8 py-3">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-3 cursor-pointer">
-          <img
-            src="/src/assets/favicon-32x32.png"
-            alt="LibraRead Logo"
-            className="w-8 h-8 object-contain"
-          />
+        <div className="cursor-pointer">
           <h1 className="text-green text-2xl md:text-3xl font-semibold">LibraRead</h1>
         </div>
 
