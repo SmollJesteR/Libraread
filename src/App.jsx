@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import SearchForm from './components/SearchForm';
-import ResultsTable from './components/ResultsTable';
-import BookDetail from './components/BookDetail';
-import ReadingList from './components/ReadingList';
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import TestimonialsSection from './components/TestimonialsSection';
-import useLocalStorage from './hooks/useLocalStorage';
+import { useState } from "react";
+import SearchForm from "./components/SearchForm";
+import ResultsTable from "./components/ResultsTable";
+import BookDetail from "./components/BookDetail";
+import ReadingList from "./components/ReadingList";
+import Navbar from "./components/Navbar";
+import HeroSection from "./components/HeroSection";
+import TestimonialsSection from "./components/TestimonialsSection";
+import Footer from "./components/Footer";
+import useLocalStorage from "./hooks/useLocalStorage";
 /**
  * Main App Component - LibraRead
  */
@@ -15,7 +16,10 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null);
-  const [readingList, setReadingList] = useLocalStorage('libraread:readingList', []);
+  const [readingList, setReadingList] = useLocalStorage(
+    "libraread:readingList",
+    []
+  );
 
   /**
    * Fetch books dari Open Library API
@@ -29,27 +33,30 @@ export default function App() {
     try {
       // Build query string
       const queryParts = [];
-      
-      if (formData.query) queryParts.push(`title=${encodeURIComponent(formData.query)}`);
-      if (formData.author) queryParts.push(`author=${encodeURIComponent(formData.author)}`);
-      if (formData.subject) queryParts.push(`subject=${encodeURIComponent(formData.subject)}`);
-      
-      const queryString = queryParts.join('&');
+
+      if (formData.query)
+        queryParts.push(`title=${encodeURIComponent(formData.query)}`);
+      if (formData.author)
+        queryParts.push(`author=${encodeURIComponent(formData.author)}`);
+      if (formData.subject)
+        queryParts.push(`subject=${encodeURIComponent(formData.subject)}`);
+
+      const queryString = queryParts.join("&");
       const url = `https://openlibrary.org/search.json?${queryString}&limit=${formData.limit}`;
 
       const response = await fetch(url);
-      
+
       if (!response.ok) {
-        throw new Error('Failed to fetch books');
+        throw new Error("Failed to fetch books");
       }
 
       const data = await response.json();
-      
+
       // Filter by year if specified
       let results = data.docs || [];
       if (formData.year) {
-        results = results.filter(book => 
-          book.first_publish_year === parseInt(formData.year)
+        results = results.filter(
+          (book) => book.first_publish_year === parseInt(formData.year)
         );
       }
 
@@ -66,14 +73,14 @@ export default function App() {
    * @param {Object} book - Book object
    */
   const addToReadingList = (book) => {
-    const exists = readingList.some(item => item.key === book.key);
-    
+    const exists = readingList.some((item) => item.key === book.key);
+
     if (exists) {
-      alert('This book is already in your reading list!');
+      alert("This book is already in your reading list!");
       return;
     }
 
-    setReadingList(prev => [...prev, book]);
+    setReadingList((prev) => [...prev, book]);
     alert(`"${book.title}" added to your reading list!`);
   };
 
@@ -101,8 +108,8 @@ export default function App() {
           {!loading && searchResults.length > 0 && (
             <div className="results-section">
               <h2>Search Results ({searchResults.length})</h2>
-              <ResultsTable 
-                data={searchResults} 
+              <ResultsTable
+                data={searchResults}
                 onSelect={setSelectedBook}
                 onAddToList={addToReadingList}
               />
@@ -117,6 +124,7 @@ export default function App() {
         <BookDetail book={selectedBook} onClose={() => setSelectedBook(null)} />
       )}
       <TestimonialsSection />
+      <Footer />
     </div>
   );
 }
