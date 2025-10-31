@@ -1,77 +1,98 @@
-# LibraRead - Digital Library Application
+# 🌿 **LibraRead - Aplikasi Perpustakaan Digital**
 
-## Student Information
-- **Name:** Muhammad Royhan Alfitra
-- **Student ID:** 123140146
-- **Course:** Web Programming
+Halo~ 👋
+Selamat datang di **LibraRead**, sebuah aplikasi perpustakaan digital modern yang dirancang untuk menemani perjalanan bacamu 📖✨
+Dibuat dengan penuh keseimbangan ala *Libra vibes* — warna hijau dan putih yang menenangkan, serta desain antarmuka yang bersih dan intuitif 💚
 
-## Description
+---
 
-LibraRead is a modern digital library application that helps users discover and manage their reading lists. Built with React and Vite, it offers a seamless experience for searching books, creating reading lists, and exploring detailed information about various literary works.
+## 👨‍🎓 **Informasi Mahasiswa**
 
-### Key Features
-- 📚 Book search with multiple filters
-- 📖 Personal reading list management
-- 🔍 Detailed book information view
-- 📱 Responsive design for all devices
-- 🎨 Modern and intuitive user interface
+| Keterangan         | Detail                   |
+| ------------------ | ------------------------ |
+| 🧑‍💻 **Nama**     | Muhammad Royhan Alfitra  |
+| 🪪 **NIM**         | 123140146                |
+| 🏫 **Mata Kuliah** | Pemrograman Aplikasi Web |
 
-## Installation
+---
 
-Follow these steps to set up the project locally:
+## 📚 **Deskripsi Proyek**
 
-1. Clone the repository
-```bash
-git clone https://github.com/SmollJesteR/Libraread.git
-cd Libraread
-```
+**LibraRead** adalah aplikasi perpustakaan digital yang memungkinkan pengguna untuk mencari buku, melihat detail informasi, dan membuat *reading list* pribadi.
+Dibangun menggunakan **React + Vite**, proyek ini mengutamakan kecepatan, tampilan modern, dan pengalaman pengguna yang halus di berbagai perangkat 💫
 
-2. Install dependencies
-```bash
-npm install
-```
+---
 
-3. Start the development server
-```bash
-npm run dev
-```
+## ✨ **Fitur Utama**
 
-The application will be available at `http://localhost:3000`
+* 🔍 **Pencarian Buku** berdasarkan *title* atau *author*
+* 📘 **Reading List Pribadi** – tambah atau hapus buku sesuai selera
+* 📖 **Detail Buku Lengkap** – lihat deskripsi, kategori, dan subjek
+* 🧩 **Filter Buku** berdasarkan *subject/category*
+* 💾 **Penyimpanan Lokal** menggunakan `localStorage`
+* 📱 **Desain Responsif** – nyaman di HP, tablet, maupun desktop
+* 🎨 **UI Modern** dengan nuansa hijau-putih yang elegan
 
-## Technologies Used
+---
 
-- **Frontend Framework:** React
-- **Build Tool:** Vite
-- **Styling:** Tailwind CSS
-- **Icons:** Feather Icons
-- **API:** Open Library API
-- **State Management:** React Hooks
-- **Local Storage:** Custom hooks for persistence
+## ⚙️ **Cara Instalasi**
 
-## Deployment
+1. Clone repository ini
 
-The application is deployed and can be accessed at:
-[LibraRead App](https://libraread-app.vercel.app)
+   ```bash
+   git clone https://github.com/SmollJesteR/Libraread.git
+   cd Libraread
+   ```
 
-## Screenshots
+2. Install dependensi
 
-### Homepage
-![Homepage](screenshots/homepage.png)
-*Homepage with hero section and navigation*
+   ```bash
+   npm install
+   ```
 
-### Book Search
-![Book Search](screenshots/search.png)
-*Book search interface with filters*
+3. Jalankan server pengembangan
 
-### Book Details
-![Book Details](screenshots/details.png)
-*Detailed book information modal*
+   ```bash
+   npm run dev
+   ```
 
-### Reading List
-![Reading List](screenshots/reading-list.png)
-*Personal reading list management*
+> 🌐 Aplikasi akan berjalan di `http://localhost:3000`
 
-## Project Structure
+---
+
+## 🧠 **Teknologi yang Digunakan**
+
+| Kategori                | Teknologi        |
+| ----------------------- | ---------------- |
+| 💻 **Frontend**         | React            |
+| ⚡ **Build Tool**        | Vite             |
+| 🎨 **Styling**          | Tailwind CSS     |
+| 🧩 **Ikon**             | Feather Icons    |
+| 🔗 **API**              | Open Library API |
+| 🧠 **State Management** | React Hooks      |
+| 💾 **Local Storage**    | Custom Hook      |
+
+---
+
+## 🚀 **Deployment**
+
+Aplikasi ini dapat diakses secara online di:
+👉 [**LibraRead App**](https://libraread-app.vercel.app)
+
+---
+
+## 🖼️ **Tangkapan Layar**
+
+| Tampilan                    | Screenshot                                    |
+| --------------------------- | --------------------------------------------- |
+| 🏠 **Beranda**              | ![Homepage](screenshots/homepage.png)         |
+| 🔍 **Pencarian Buku**       | ![Book Search](screenshots/search.png)        |
+| 📖 **Detail Buku**          | ![Book Details](screenshots/details.png)      |
+| 📚 **Reading List Pribadi** | ![Reading List](screenshots/reading-list.png) |
+
+---
+
+## 🗂️ **Struktur Proyek**
 
 ```
 libraread/
@@ -94,13 +115,23 @@ libraread/
 └── package.json
 ```
 
-## License
+---
 
-This project is made for educational purposes as part of the Web Programming course.
+## 🪪 **Lisensi**
 
-## Contact
+Proyek ini dibuat untuk tujuan edukasi sebagai bagian dari tugas **UTS Pemrograman Aplikasi Web**.
+Semua hak cipta tetap dimiliki oleh pengembang asli 💚
 
-Muhammad Royhan Alfitra
-- GitHub: [@SmollJesteR](https://github.com/SmollJesteR)
-- Instagram: [@mroyhaf](https://www.instagram.com/mroyhaf)
-- Portfolio: [SmollJester Archive](https://smolljesterarchieve.vercel.app/)
+---
+
+## 📬 **Kontak**
+
+| Platform         | Info                                                           |
+| ---------------- | -------------------------------------------------------------- |
+| 🧑‍💻 **GitHub** | [@SmollJesteR](https://github.com/SmollJesteR)                 |
+| 📸 **Instagram** | [@mroyhaf](https://www.instagram.com/mroyhaf)                  |
+| 🌐 **Portfolio** | [SmollJester Archive](https://smolljesterarchieve.vercel.app/) |
+
+---
+
+💚 *"Balance your shelves and your mind — read with LibraRead."* 🌿
